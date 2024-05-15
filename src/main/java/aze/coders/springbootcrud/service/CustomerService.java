@@ -11,4 +11,10 @@ public interface CustomerService {
     CustomersDtoResponse getCustomerByName(String name);
 
     void deleteCustomer(Integer id);
+
+    void saveCustomer(CustomerDto customerDto);
+
+    void updateCustomer(Integer id, String name);
+
+    void updateCustomerWithPatch(Integer id, String name);
 }
