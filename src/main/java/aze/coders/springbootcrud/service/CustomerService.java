@@ -12,7 +12,7 @@ public interface CustomerService {
 
     void deleteCustomer(Integer id);
 
-    void saveCustomer(CustomerDto customerDto);
+    CustomerDto saveCustomer(CustomerDto customerDto);
 
     void updateCustomer(Integer id, String name);
 

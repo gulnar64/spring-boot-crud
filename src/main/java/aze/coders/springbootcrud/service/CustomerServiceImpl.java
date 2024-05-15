@@ -5,6 +5,7 @@ import aze.coders.springbootcrud.exception.CUSTOMER_NOT_FOUND_EXCEPTION;
 import aze.coders.springbootcrud.model.CustomerDto;
 import aze.coders.springbootcrud.model.CustomersDtoResponse;
 import aze.coders.springbootcrud.repository.CustomerRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void saveCustomer(CustomerDto customerDto) {
-        customerRepository.save(convertDtoToEntity(customerDto));
+    @Transactional
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
+        return convertEntityToDto(customerRepository.save(convertDtoToEntity(customerDto)));
     }
 
     @Override
