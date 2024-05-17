@@ -1,7 +1,8 @@
 package aze.coders.springbootcrud.service;
 
 import aze.coders.springbootcrud.entity.Customer;
-import aze.coders.springbootcrud.exception.CUSTOMER_NOT_FOUND_EXCEPTION;
+import aze.coders.springbootcrud.enums.ErrorDetails;
+import aze.coders.springbootcrud.exception.CustomerNotFoundException;
 import aze.coders.springbootcrud.model.CustomerDto;
 import aze.coders.springbootcrud.model.CustomersDtoResponse;
 import aze.coders.springbootcrud.repository.CustomerRepository;
@@ -43,8 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerDto saveCustomer(CustomerDto customerDto) {
-        return convertEntityToDto(customerRepository.save(convertDtoToEntity(customerDto)));
+    public void saveCustomer(CustomerDto customerDto) {
+        customerRepository.save(convertDtoToEntity(customerDto));
+        findById(3);
     }
 
     @Override
@@ -77,6 +79,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private Customer findById(Integer id) {
-        return customerRepository.findById(id).orElseThrow(() -> new CUSTOMER_NOT_FOUND_EXCEPTION("Customer not found"));
+        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorDetails.CUSTOMER_NOT_FOUND));
     }
 }

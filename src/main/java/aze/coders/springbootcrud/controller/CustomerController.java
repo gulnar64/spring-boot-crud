@@ -5,6 +5,7 @@ import aze.coders.springbootcrud.model.CustomersDtoResponse;
 import aze.coders.springbootcrud.service.CustomerService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,9 @@ public class CustomerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> saveCustomer(@RequestBody CustomerDto customerDto) {
-        if (customerDto.getName().length() > 10)
-            return ResponseEntity.ok(customerService.saveCustomer(customerDto));
-        else
-            return ResponseEntity.ofNullable("Customer name is too long");
+    public void saveCustomer(@RequestHeader ("lang") String lang,
+            @RequestBody CustomerDto customerDto) {
+        customerService.saveCustomer(customerDto);
     }
 
     @GetMapping("/{id}")
@@ -58,11 +57,5 @@ public class CustomerController {
     public void updateCustomerWithPatch(@PathVariable Integer id, @RequestParam String name) {
         customerService.updateCustomerWithPatch(id, name);
     }
-
-    @PostMapping("/post")
-    public void transactionCustomer(@RequestBody CustomerDto customerDto) {
-        customerService.saveCustomer(customerDto);
-    }
-
 
 }
