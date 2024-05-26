@@ -1,5 +1,6 @@
 package aze.coders.springbootcrud.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,8 +16,11 @@ import java.util.Collections;
 
 @Configuration
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SpringSecurityConfig {
-//    @Bean
+    private final JwtFilterConfigurerAdapter jwtFilterConfigurerAdapter;
+
+    //    @Bean
 //    InMemoryUserDetailsManager userDetailsManager() {
 //        return new InMemoryUserDetailsManager(
 //                new User("user", "{noop}12345", Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))),
@@ -24,7 +28,7 @@ public class SpringSecurityConfig {
 //        );
 //    }
     @Bean
-    BCryptPasswordEncoder passwordEncoder(){
+    BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -37,6 +41,7 @@ public class SpringSecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults());
+        http.apply(jwtFilterConfigurerAdapter);
         return http.build();
     }
 
