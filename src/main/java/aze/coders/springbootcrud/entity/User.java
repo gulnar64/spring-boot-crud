@@ -1,13 +1,16 @@
 package aze.coders.springbootcrud.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "users")
+//@Builder
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +24,8 @@ public class User implements UserDetails {
     private boolean enabled;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Authority> authorities;
+
+    public User() {
+
+    }
 }
