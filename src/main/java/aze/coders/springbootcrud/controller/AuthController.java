@@ -10,21 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static aze.coders.springbootcrud.service.impl.AuthServiceImpl.REFRESH_TOKEN;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-
-    @Value("${jwt.access-expire-time}")
-    private long accessExpireTime;
-
-    @Value("${jwt.refresh-expire-time}")
-    private long refreshExpireTime;
-
-    public final static String ACCESS_TOKEN = "access_token";
     public final static String REFRESH_TOKEN = "refresh_token";
 
     @PostMapping("/sign-in")
