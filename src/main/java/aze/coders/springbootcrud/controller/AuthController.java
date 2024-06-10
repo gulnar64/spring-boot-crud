@@ -4,7 +4,6 @@ import aze.coders.springbootcrud.model.SignInRequest;
 import aze.coders.springbootcrud.model.SignInResponse;
 import aze.coders.springbootcrud.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
