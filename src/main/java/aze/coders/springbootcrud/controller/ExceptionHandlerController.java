@@ -2,6 +2,7 @@ package aze.coders.springbootcrud.controller;
 
 import aze.coders.springbootcrud.enums.ErrorDetails;
 import aze.coders.springbootcrud.exception.CustomerNotFoundException;
+import aze.coders.springbootcrud.exception.UnAuthorizedException;
 import aze.coders.springbootcrud.model.ErrorResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,6 +13,11 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(CustomerNotFoundException.class)
     public ErrorResponse handleCustomerNotFoundException(CustomerNotFoundException e) {
+        return new ErrorResponse(e.getCode(), e.getMessage());
+    }
+
+    @ExceptionHandler(UnAuthorizedException.class)
+    public ErrorResponse handleUnAuthorizedException(UnAuthorizedException e) {
         return new ErrorResponse(e.getCode(), e.getMessage());
     }
 

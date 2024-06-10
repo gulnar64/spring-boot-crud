@@ -16,6 +16,7 @@ server:
 
 jwt:
   secret-key: RlgxVlRSVklpTENKU1QweEZYMEZFVFVsT0lsMHNJbUZqWTI5MWJuUk9iMjVGZUhCcGNtVmtJanAwYw==
-  expire-time: 99999999
+  access-expire-time: 300000
+  refresh-expire-time: 360000
 #  api-docs:
 #    enabled: true

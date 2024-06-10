@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class JwtServiceImpl implements JwtService {
     @Value("${jwt.secret-key}")
     private String secretKey;
-    @Value("${jwt.expire-time}")
+    @Value("${jwt.access-expire-time}")
     private long expireTime;
 
 
