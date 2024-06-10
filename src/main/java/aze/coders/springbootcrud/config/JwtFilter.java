@@ -23,11 +23,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.*;
+
 @Configuration
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     public static final String AUTHORITIES = "authorities";
+    public static final String BEARER = "Bearer ";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -39,15 +42,15 @@ public class JwtFilter extends OncePerRequestFilter {
     private Optional<Authentication> authenticate(HttpServletRequest request) {
         Optional<String> token = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION));
         if (token.isPresent()) {
-            Claims claims = jwtService.parseToken(token.get());
+            Claims claims = jwtService.parseToken(token.get().substring(BEARER.length()));
             return Optional.of(new UsernamePasswordAuthenticationToken(claims.getSubject(), "", getAuthorities(claims)));
         }
         return Optional.empty();
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Claims claims) {
-        List<?> roles = Collections.singletonList(claims.get(AUTHORITIES));
-        return roles.stream().map(auth -> new SimpleGrantedAuthority(auth.toString())).collect(Collectors.toList());
+        List<?> roles = (List<?>) claims.get(AUTHORITIES);
+        return roles.stream().map(auth -> new SimpleGrantedAuthority(auth.toString())).toList();
     }
 }
 
