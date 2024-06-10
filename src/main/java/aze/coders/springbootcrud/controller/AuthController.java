@@ -1,22 +1,13 @@
 package aze.coders.springbootcrud.controller;
 
-import aze.coders.springbootcrud.model.AccessTokenDto;
-import aze.coders.springbootcrud.model.RefreshTokenDto;
 import aze.coders.springbootcrud.model.SignInRequest;
 import aze.coders.springbootcrud.model.SignInResponse;
 import aze.coders.springbootcrud.service.AuthService;
-import aze.coders.springbootcrud.service.JwtService;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.patterns.IToken;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import static aze.coders.springbootcrud.service.impl.AuthServiceImpl.REFRESH_TOKEN;

@@ -62,14 +62,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void setCookie(HttpHeaders httpHeaders, SignInResponse signInResponse) {
-        ResponseCookie token = ResponseCookie.from(ACCESS_TOKEN, signInResponse.getAccessTokenDto().getToken())
+        ResponseCookie accessToken = ResponseCookie.from(ACCESS_TOKEN, signInResponse.getAccessTokenDto().getToken())
                 .httpOnly(true)
                 .secure(false)
                 .path("/")
                 .maxAge(accessExpireTime)
                 .sameSite("LAX")
                 .build();
-        httpHeaders.add(HttpHeaders.SET_COOKIE, token.toString());
+        httpHeaders.add(HttpHeaders.SET_COOKIE, accessToken.toString());
         ResponseCookie refreshToken = ResponseCookie.from(REFRESH_TOKEN, signInResponse.getRefreshTokenDto().getToken())
                 .httpOnly(true)
                 .secure(false)
@@ -77,19 +77,19 @@ public class AuthServiceImpl implements AuthService {
                 .maxAge(refreshExpireTime)
                 .sameSite("LAX")
                 .build();
-        httpHeaders.add(HttpHeaders.SET_COOKIE, token.toString());
+        httpHeaders.add(HttpHeaders.SET_COOKIE, refreshToken.toString());
     }
 
     @Override
     public void clearCookie(HttpHeaders httpHeaders) {
-        ResponseCookie token = ResponseCookie.from(ACCESS_TOKEN, "")
+        ResponseCookie accessToken = ResponseCookie.from(ACCESS_TOKEN, "")
                 .httpOnly(true)
                 .secure(false)
                 .path("/")
                 .maxAge(0)
                 .sameSite("LAX")
                 .build();
-        httpHeaders.add(HttpHeaders.SET_COOKIE, token.toString());
+        httpHeaders.add(HttpHeaders.SET_COOKIE, accessToken.toString());
         ResponseCookie refreshToken = ResponseCookie.from(REFRESH_TOKEN, "")
                 .httpOnly(true)
                 .secure(false)
@@ -97,7 +97,7 @@ public class AuthServiceImpl implements AuthService {
                 .maxAge(0)
                 .sameSite("LAX")
                 .build();
-        httpHeaders.add(HttpHeaders.SET_COOKIE, token.toString());
+        httpHeaders.add(HttpHeaders.SET_COOKIE, refreshToken.toString());
     }
 
     @Override

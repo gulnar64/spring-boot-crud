@@ -2,8 +2,9 @@ package aze.coders.springbootcrud.exception;
 
 import aze.coders.springbootcrud.enums.ErrorDetails;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Data
+Data
 public class UnAuthorizedException extends RuntimeException {
 
     private Integer code;

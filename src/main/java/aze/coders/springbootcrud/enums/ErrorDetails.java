@@ -1,6 +1,11 @@
 package aze.coders.springbootcrud.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
 
+@Getter
+@AllArgsConstructor
 public enum ErrorDetails {
     CUSTOMER_NOT_FOUND(404, "Customer not found"),
     TYPE_MISMATCH_EXCEPTION(305, "Type mismatch exception"),
@@ -12,20 +17,4 @@ public enum ErrorDetails {
     private final Integer code;
     private final String message;
 
-    ErrorDetails(Integer code, String message) {
-        this.code = code;
-        this.message = message;
-    }
-    ErrorDetails( String message) {
-        this.code = 1000;
-        this.message = message;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }
